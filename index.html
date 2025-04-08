@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Resume Validator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        textarea, input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .feedback-container {
+            margin-top: 20px;
+            text-align: left;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
+        }
+        .match-score {
+            font-size: 20px;
+            font-weight: bold;
+            color: #007bff;
+        }
+        .section {
+            margin-top: 10px;
+            padding: 10px;
+            border-left: 4px solid #28a745;
+            background: #f9f9f9;
+            border-radius: 5px;
+        }
+        .missing {
+            border-left-color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AI Resume Validator</h1>
+        <form method="post" enctype="multipart/form-data">
+            <label for="job_description">Job Description:</label>
+            <textarea id="job_description" name="job_description" rows="4" required></textarea>
+
+            <label for="resume">Upload Resume (PDF/Word):</label>
+            <input type="file" id="resume" name="resume" accept=".pdf,.docx" required>
+
+            <button type="submit">Validate Resume</button>
+        </form>
+
+        {% if match_score is not none %}
+            <div class="feedback-container">
+                <div class="match-score">Match Score: {{ match_score }}%</div>
+                <div>{{ feedback_html | safe }}</div>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
